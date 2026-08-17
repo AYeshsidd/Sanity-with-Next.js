@@ -40,15 +40,36 @@ import { defineQuery } from 'next-sanity'
 // `);
 
 
-
-export const PRODUCTS_QUERY  = defineQuery(`
-  *[ _type == "product" && slug.current == $slug][0]
-   {
+export const PRODUCTS_QUERY = defineQuery(`
+  *[
+    _type == "product" ] {
     _id,
-    slug,
     productName,
     price,
     stockAvailable,
+    size,
+    color,
+    tags,
+    "images": images[].asset->url,
+    "category": category->{
+      title,
+      "slug": slug.current
+    }
+  }
+`);
+
+export const PRODUCT_BY_SLUG_QUERY = defineQuery(`
+  *[
+    _type == "product" &&
+    slug.current == $slug
+  ][0] {
+    _id,
+    productName,
+    price,
+    stockAvailable,
+    size,
+    color,
+    tags,
     "images": images[].asset->url,
     "category": category->{
       title,

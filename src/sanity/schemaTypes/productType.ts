@@ -85,6 +85,7 @@ export const productType = defineType({
       initialValue: false,
     }),
 
+
 defineField({
   name: 'slug',
   title: 'Slug',
@@ -92,7 +93,7 @@ defineField({
   options: {
     source: 'productName',
   },
-  validation: (rule) => rule.required().error("Type URL plese"),
+  validation: (rule) => rule.required(),
 }),
 
   ],

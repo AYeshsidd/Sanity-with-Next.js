@@ -5,10 +5,7 @@ import { PRODUCTS_QUERY } from "@/sanity/lib/queries";
 import { Product } from "@/data/products";
 import { client } from "@/sanity/lib/client";
 export default async function Home() {
-  const products: Product[] = await client.fetch(PRODUCTS_QUERY,{
-  start: 0,
-  end: 8,
-  })
+  const products: Product[] = await client.fetch(PRODUCTS_QUERY)
   return (
     <>
       <main className="bg-white min-h-screen">

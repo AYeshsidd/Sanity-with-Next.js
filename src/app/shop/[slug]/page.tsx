@@ -1,19 +1,15 @@
 import { client } from "@/sanity/lib/client";
-import { PRODUCTS_QUERY} from "@/sanity/lib/queries";
-
-interface ProductPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+import { PRODUCT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 
 export default async function ProductPage({
   params,
-}: ProductPageProps) {
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
   const product = await client.fetch(
-    PRODUCTS_QUERY,
+    PRODUCT_BY_SLUG_QUERY,
     { slug }
   );
 
@@ -22,7 +18,7 @@ export default async function ProductPage({
   }
 
   return (
-    <main className="min-h-screen bg-white p-10">
+    <main className="min-h-screen bg-white text-red-700 p-10">
       <h1 className="text-3xl font-semibold">
         {product.productName}
       </h1>
@@ -33,10 +29,6 @@ export default async function ProductPage({
 
       <p className="mt-2">
         Stock: {product.stockAvailable}
-      </p>
-
-      <p className="mt-2">
-        Category: {product.category?.title}
       </p>
     </main>
   );
